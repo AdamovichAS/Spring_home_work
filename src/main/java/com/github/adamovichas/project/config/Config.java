@@ -7,6 +7,7 @@ import com.github.adamovichas.project.service.IService;
 import com.github.adamovichas.project.service.ServiceCollectionInject;
 import com.github.adamovichas.project.service.ServiceFirst;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -39,5 +40,9 @@ public class Config {
         daos.add(firstDao());
         daos.add(secondDao());
         return new ServiceCollectionInject(daos);
+    }
+    @Bean
+    public BeanPostProcessor postProcessor(){
+        return new com.github.adamovichas.project.processor.BeanPostProcessor();
     }
 }

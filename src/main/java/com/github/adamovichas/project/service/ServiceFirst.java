@@ -1,6 +1,7 @@
 package com.github.adamovichas.project.service;
 
 
+import com.github.adamovichas.project.annotation.TimeMethod;
 import com.github.adamovichas.project.dao.IDao;
 import com.github.adamovichas.project.model.User;
 
@@ -25,7 +26,7 @@ public class ServiceFirst implements IService {
     public void setDao(IDao dao) {
         this.dao = dao;
     }
-
+    @TimeMethod
     public IDao getDao() {
         return dao;
     }
