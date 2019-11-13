@@ -19,4 +19,9 @@ public class ServiceFieldInject implements IService {
     public void updateUserName(User user) {
         user.setName(NEW_NAME);
     }
+
+    @Override
+    public String toString() {
+        return dao.createUser().toString();
+    }
 }

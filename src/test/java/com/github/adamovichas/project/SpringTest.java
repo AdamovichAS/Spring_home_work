@@ -22,7 +22,9 @@ class SpringTest {
         final GenericXmlApplicationContext context = new GenericXmlApplicationContext("beans_config.xml");
         final IDao bean = context.getBean(IDao.class);
         final User user = bean.createUser();
+        System.out.println("---Бин через XML---");
         System.out.println(user);
+        System.out.println("--------");
     }
 
     /**
@@ -33,10 +35,12 @@ class SpringTest {
         final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
         final IService service = context.getBean("firstService", IService.class);
         final IDao dao = context.getBean("firstDao",IDao.class);
+        System.out.println("---Бины через config---");
         User user = dao.createUser();
         System.out.println(user);
         service.updateUserName(user);
         System.out.println(user);
+        System.out.println("------------");
     }
 
     /**
@@ -52,9 +56,11 @@ class SpringTest {
         final IDao dao = context.getBean(IDao.class);
         final IService service = context.getBean(IService.class);
         final User user = dao.createUser();
+        System.out.println("-----Бины через аннотации + сеттер----");
         System.out.println(user);
         service.updateUserName(user);
         System.out.println(user);
+        System.out.println("------------");
     }
 
     /**
@@ -69,15 +75,13 @@ class SpringTest {
         context.register(ServiceSetterInject.class);
         context.register(ServiceFieldInject.class);
         context.refresh();
-        final IDao dao = (IDao) context.getBean("second dao");
+
         final IService service = (IService) context.getBean("field service");
         final IService setter_service = (IService) context.getBean("setter service");
-        final User user = dao.createUser();
-        System.out.println(user);
-        service.updateUserName(user);
-        System.out.println(user);
-        setter_service.updateUserName(user);
-        System.out.println(user);
+        System.out.println("---инжект бина через поле + инжект 2 бинов одного интерфейса по имени---");
+        System.out.println(service);
+        System.out.println(setter_service);
+        System.out.println("---------------");
     }
 
     /**
@@ -95,9 +99,11 @@ class SpringTest {
         final IDao dao = (IDao) context.getBean("second dao");
         final IService service = (IService) context.getBean("constructor service");
         final User user = dao.createUser();
+        System.out.println("---инжект бина через конструктор---");
         System.out.println(user);
         service.updateUserName(user);
         System.out.println(user);
+        System.out.println("-------------");
     }
 
     /**
@@ -107,6 +113,8 @@ class SpringTest {
     void serviceCollectionInject(){
         final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
         final IService service = context.getBean("collectionService", IService.class);
+        System.out.println("---инжект списка бинов через конструктор----");
         System.out.println(service);
+        System.out.println("-----------");
     }
 }

@@ -22,4 +22,9 @@ public class ServiceSetterInject implements IService{
     public void setDao(IDao dao) {
         this.dao = dao;
     }
+
+    @Override
+    public String toString() {
+        return dao.createUser().toString();
+    }
 }

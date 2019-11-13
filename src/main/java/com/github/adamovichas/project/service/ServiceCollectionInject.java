@@ -23,7 +23,7 @@ public class ServiceCollectionInject implements IService{
     public String toString() {
         StringBuilder daosName = new StringBuilder();
         for (IDao dao : daos) {
-            daosName.append(dao.createUser()).append(" ");
+            daosName.append(dao.createUser()).append(", ");
         }
         return daosName.toString();
     }
