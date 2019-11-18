@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class SpringTest {
 
     /**
@@ -25,6 +27,7 @@ class SpringTest {
         System.out.println("---Бин через XML---");
         System.out.println(user);
         System.out.println("--------");
+        assertEquals(user.getName(),"first dao");
     }
 
     /**
@@ -41,6 +44,7 @@ class SpringTest {
         service.updateUserName(user);
         System.out.println(user);
         System.out.println("------------");
+        assertEquals(user.getName(),"first service");
     }
 
     /**
@@ -60,9 +64,11 @@ class SpringTest {
         final User user = dao.createUser();
         System.out.println("-----Бины через аннотации + сеттер----");
         System.out.println(user);
+        assertEquals(user.getName(),"first dao");
         service.updateUserName(user);
         System.out.println(user);
         System.out.println("------------");
+        assertEquals(user.getName(),"service setter inject");
     }
 
     /**
@@ -84,6 +90,8 @@ class SpringTest {
         System.out.println(service);
         System.out.println(setter_service);
         System.out.println("---------------");
+        assertEquals(setter_service.toString(),"first dao");
+        assertEquals(service.toString(),"second dao");
     }
 
     /**
@@ -103,7 +111,9 @@ class SpringTest {
         final User user = dao.createUser();
         System.out.println("---инжект бина через конструктор---");
         System.out.println(user);
+        assertEquals(user.toString(),"second dao");
         service.updateUserName(user);
+        assertEquals(user.toString(),"constructor inject");
         System.out.println(user);
         System.out.println("-------------");
     }
@@ -118,6 +128,7 @@ class SpringTest {
         System.out.println("---инжект списка бинов через конструктор----");
         System.out.println(service);
         System.out.println("-----------");
+        assertEquals(service.toString(),"first dao, second dao, ");
     }
 
     /**
