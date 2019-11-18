@@ -6,6 +6,7 @@ import com.github.adamovichas.project.dao.DaoFirst;
 import com.github.adamovichas.project.dao.DaoSecond;
 import com.github.adamovichas.project.dao.IDao;
 import com.github.adamovichas.project.model.User;
+import com.github.adamovichas.project.processor.PostProcessor;
 import com.github.adamovichas.project.service.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -15,8 +16,6 @@ class SpringTest {
 
     /**
      * создать контекст с 1 бином с помощью xml
-     * сделать инжект значения из файла проперти
-     * Написать свой бинпостпроцессор который будет замерять время работы метода помеченного аннотацией(Работает если метод не принимает на вход параметры)
      */
     @Test
     void xmlTest() {
@@ -30,7 +29,6 @@ class SpringTest {
 
     /**
      * создать контекст с 1 бином с помощью java config
-     * Написать свой бинпостпроцессор который будет замерять время работы метода помеченного аннотацией(Работает если метод не принимает на вход параметры)
      */
     @Test
     void configTest() {
@@ -48,11 +46,13 @@ class SpringTest {
     /**
      * создать контекст с 1 бином с помощью аннотаций
      * сделать инжект бина через сеттер
+     * Написать свой бинпостпроцессор который будет замерять время работы метода помеченного аннотацией
      */
     @Test
     void annotationTest(){
         final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(DaoFirst.class);
+        context.register(PostProcessor.class);
         context.register(ServiceSetterInject.class);
         context.refresh();
         final IDao dao = context.getBean(IDao.class);
@@ -118,5 +118,17 @@ class SpringTest {
         System.out.println("---инжект списка бинов через конструктор----");
         System.out.println(service);
         System.out.println("-----------");
+    }
+
+    /**
+     * сделать инжект значения из файла проперти
+     */
+    @Test
+    void serviceProperty(){
+        final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+        final IService propertyService = context.getBean("propertyService", IService.class);
+        System.out.println("----инжект бина через проперти----");
+        System.out.println(propertyService);
+        System.out.println("-------------");
     }
 }

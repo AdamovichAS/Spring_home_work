@@ -1,5 +1,6 @@
 package com.github.adamovichas.project.service;
 
+import com.github.adamovichas.project.annotation.Profiling;
 import com.github.adamovichas.project.dao.IDao;
 import com.github.adamovichas.project.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ public class ServiceSetterInject implements IService{
     private final String NEW_NAME = "service setter inject";
 
     @Override
+    @Profiling
     public void updateUserName(User user) {
         user.setName(NEW_NAME);
     }

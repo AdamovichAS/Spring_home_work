@@ -1,6 +1,6 @@
 package com.github.adamovichas.project.dao;
 
-import com.github.adamovichas.project.annotation.TimeMethod;
+import com.github.adamovichas.project.annotation.Profiling;
 import com.github.adamovichas.project.model.User;
 import org.springframework.stereotype.Component;
 
@@ -9,8 +9,13 @@ public class DaoFirst implements IDao {
 
 
     @Override
-    @TimeMethod
+    @Profiling
     public User createUser() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return new User("first dao");
     }
 }
